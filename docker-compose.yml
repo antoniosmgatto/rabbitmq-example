@@ -8,6 +8,19 @@ services:
     healthcheck:
       test: "exit 0"
 
+  consumer:
+    build: .
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    volumes:
+      - .:/app
+    command: ["bundle", "exec", "./consumer.rb"]
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    restart: on-failure:5
+
   sender:
     build: .
     environment:
