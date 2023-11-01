@@ -1,0 +1,15 @@
+# Exclude a directory and its contents
+.history
+
+# Exclude all .md files
+*.md
+
+# Exclude all files with a specific extension
+*.log
+
+# Exclude all .git directories
+.git/
+
+# Exclude build artifacts or temporary files
+build/
+temp/
