@@ -5,3 +5,17 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+    healthcheck:
+      test: "exit 0"
+
+  sender:
+    build: .
+    environment:
+      - RABBITMQ_HOST=rabbitmq
+      - RABBITMQ_PORT=5672
+    volumes:
+      - .:/app
+    command: ["bundle", "exec", "./sender.rb"]
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
